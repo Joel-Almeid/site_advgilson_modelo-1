@@ -1,16 +1,18 @@
 import { motion } from "framer-motion";
-import { ChevronRight, Check, ShieldAlert, Scale, FileText, Gavel, Lock, Shield, MapPin, Phone, Mail, CheckCircle2 } from "lucide-react";
+import { ChevronRight, Check, ShieldAlert, Scale, FileText, Gavel, Lock, Shield, MapPin, Phone, Mail, PlayCircle } from "lucide-react";
 import { FaWhatsapp, FaInstagram } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import logo from "@/assets/logo_gilson.png";
 import imgGilsonAuthority from "@/assets/fotogilson3.png";
-import { initAnalytics, trackLead, trackPageView, trackWhatsApp } from "@/lib/analytics";
+import { initAnalytics, trackEvent, trackPageView, trackWhatsApp } from "@/lib/analytics";
 
 const WHATSAPP = "5563984474070";
 const INSTAGRAM_URL = "https://instagram.com/gilsoncarvalho.adv";
 const EMAIL = "advogado@gilsoncarvalho.com";
 const MAPS_URL = "https://maps.google.com/?q=Av.+Guanabara,+1669,+Centro+-+Gurupi,+TO";
+const MAPS_URL_RJ = "https://maps.app.goo.gl/aHr8H2udhfHtgt7r5";
 const MAPS_EMBED = "https://www.google.com/maps?q=Av.%20Guanabara%2C%201669%2C%20Centro%20-%20Gurupi%2C%20TO&output=embed";
+
 
 
 export const waLink = (msg: string) =>
@@ -41,11 +43,8 @@ export type LandingProps = {
 };
 
 export default function LegalLanding(p: LandingProps) {
-  const [form, setForm] = useState({ nome: "", telefone: "", email: "", mensagem: "" });
-  const [sent, setSent] = useState(false);
-  const [sending, setSending] = useState(false);
-  const [waFinalLink, setWaFinalLink] = useState("");
-  const [error, setError] = useState("");
+
+
 
   const [waTipVisible, setWaTipVisible] = useState(false);
   const [waTipKey, setWaTipKey] = useState(0);
@@ -66,39 +65,6 @@ export default function LegalLanding(p: LandingProps) {
   }, []);
 
 
-  const maskPhone = (v: string) => {
-    const d = v.replace(/\D/g, "").slice(0, 11);
-    if (d.length <= 2) return d.length ? `(${d}` : "";
-    if (d.length <= 6) return `(${d.slice(0, 2)}) ${d.slice(2)}`;
-    if (d.length <= 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
-    return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (sending) return;
-    const nome = form.nome.trim();
-    const telefone = form.telefone.trim();
-    const mensagem = form.mensagem.trim();
-    if (!nome || !telefone || !mensagem) {
-      setError("Preencha nome, telefone e a descrição do seu caso.");
-      return;
-    }
-    setError("");
-    setSending(true);
-
-    const texto = `Olá, Dr. Gilson! Meu nome é ${nome}. Gostaria de um atendimento sobre: ${p.eyebrow} — ${mensagem}. Telefone: ${telefone}${form.email.trim() ? ` · E-mail: ${form.email.trim()}` : ""}`;
-    const link = waLink(texto);
-    setWaFinalLink(link);
-
-    trackLead(p.eyebrow);
-    trackWhatsApp("formulario_triagem");
-
-    window.open(link, "_blank", "noopener");
-
-    setSent(true);
-    setSending(false);
-  };
 
 
 
