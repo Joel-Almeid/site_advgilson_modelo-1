@@ -5,10 +5,6 @@ import {
   MapPin,
   Instagram,
   Mail,
-  Scale,
-  Users,
-  FileText,
-  HeartHandshake,
   ExternalLink,
   Globe,
   Share2,
@@ -116,16 +112,6 @@ const topActions: ActionItem[] = [
     onClick: () => trackEvent("click_link_email", { local: "links" }),
   },
 ];
-
-const serviceLinks: ActionItem[] = [
-  { label: "Divórcio Rápido e Justo", to: "/divorcio", Icon: Scale, showExternalIcon: true },
-  { label: "Guarda e Pensão Alimentícia", to: "/pensao-e-guarda", Icon: Users, showExternalIcon: true },
-  { label: "Inventário e Partilha de Bens", to: "/inventario", Icon: FileText, showExternalIcon: true },
-  { label: "União Estável e Proteção Patrimonial", to: "/uniao-estavel", Icon: HeartHandshake, showExternalIcon: true },
-].map((it) => ({
-  ...it,
-  onClick: () => trackEvent("click_link_especialidade", { servico: it.label }),
-}));
 
 function LinkButton({
   item,
