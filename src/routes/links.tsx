@@ -5,10 +5,6 @@ import {
   MapPin,
   Instagram,
   Mail,
-  Scale,
-  Users,
-  FileText,
-  HeartHandshake,
   ExternalLink,
   Globe,
   Share2,
@@ -116,16 +112,6 @@ const topActions: ActionItem[] = [
     onClick: () => trackEvent("click_link_email", { local: "links" }),
   },
 ];
-
-const serviceLinks: ActionItem[] = [
-  { label: "Divórcio Rápido e Justo", to: "/divorcio", Icon: Scale, showExternalIcon: true },
-  { label: "Guarda e Pensão Alimentícia", to: "/pensao-e-guarda", Icon: Users, showExternalIcon: true },
-  { label: "Inventário e Partilha de Bens", to: "/inventario", Icon: FileText, showExternalIcon: true },
-  { label: "União Estável e Proteção Patrimonial", to: "/uniao-estavel", Icon: HeartHandshake, showExternalIcon: true },
-].map((it) => ({
-  ...it,
-  onClick: () => trackEvent("click_link_especialidade", { servico: it.label }),
-}));
 
 function LinkButton({
   item,
@@ -319,26 +305,6 @@ function LinksPage() {
           ))}
         </ul>
 
-        {/* Serviços principais */}
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.55 }}
-          className="mt-8 w-full"
-        >
-          <div className="flex items-center gap-3 mb-4">
-            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
-            <span className="text-[11px] tracking-[0.25em] uppercase text-gold/80">
-              Especialidades
-            </span>
-            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
-          </div>
-          <ul className="w-full space-y-2.5">
-            {serviceLinks.map((it, i) => (
-              <LinkButton key={it.label} item={it} index={i + topActions.length} />
-            ))}
-          </ul>
-        </motion.div>
 
         {/* Footer */}
         <motion.div
