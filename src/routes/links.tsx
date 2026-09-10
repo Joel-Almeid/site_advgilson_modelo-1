@@ -319,26 +319,6 @@ function LinksPage() {
           ))}
         </ul>
 
-        {/* Serviços principais */}
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.55 }}
-          className="mt-8 w-full"
-        >
-          <div className="flex items-center gap-3 mb-4">
-            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
-            <span className="text-[11px] tracking-[0.25em] uppercase text-gold/80">
-              Especialidades
-            </span>
-            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
-          </div>
-          <ul className="w-full space-y-2.5">
-            {serviceLinks.map((it, i) => (
-              <LinkButton key={it.label} item={it} index={i + topActions.length} />
-            ))}
-          </ul>
-        </motion.div>
 
         {/* Footer */}
         <motion.div

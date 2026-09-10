@@ -237,7 +237,85 @@ export default function LegalLanding(p: LandingProps) {
         </div>
       </section>
 
-      {/* FINAL CTA + EMBEDDED FORM */}
+      {/* CONHEÇA O ESCRITÓRIO — INSTAGRAM */}
+      <section className="relative py-24 lg:py-28 overflow-hidden" style={{ backgroundColor: "#1f1f1f" }}>
+        <div className="absolute inset-0 bg-cover bg-center opacity-20" style={{ backgroundImage: `url(${solutionsBg})` }} />
+        <div className="absolute inset-0" style={{ backgroundColor: "rgba(15,15,15,0.8)" }} />
+        <div className="relative max-w-6xl mx-auto px-6 lg:px-10">
+          <div className="text-center mb-14">
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <div className="w-12 h-px bg-gold" />
+              <span className="text-xs tracking-[0.3em] uppercase text-gold">Conheça o Escritório</span>
+              <div className="w-12 h-px bg-gold" />
+            </div>
+            <h2 className="font-serif-luxe text-3xl md:text-4xl lg:text-5xl text-stone-50 text-balance">
+              Bastidores de quem <em className="text-gold-gradient not-italic">defende o seu caso</em>
+            </h2>
+            <p className="mt-5 text-stone-300 max-w-2xl mx-auto leading-relaxed">
+              Acompanhe nossa rotina, decisões e orientações jurídicas no dia a dia — transparência antes mesmo do primeiro contato.
+            </p>
+          </div>
+
+          <motion.div {...reveal} className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Moldura de celular — placeholder de Reels */}
+            <div className="mx-auto w-[260px] sm:w-[290px]">
+              <div className="relative rounded-[2.2rem] border-[6px] p-2 shadow-2xl shadow-black/60" style={{ borderColor: "#1a1a1a", backgroundColor: "#141414" }}>
+                <div className="absolute left-1/2 -translate-x-1/2 top-3 h-1.5 w-16 rounded-full bg-black/70" />
+                <a
+                  href={INSTAGRAM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackEvent("click_instagram", { local: "secao_escritorio" })}
+                  className="group relative flex aspect-[9/16] w-full items-center justify-center overflow-hidden rounded-[1.7rem] border border-gold/25"
+                  style={{ backgroundColor: "#0f0f0f" }}
+                >
+                  <div className="absolute inset-0 bg-cover bg-center opacity-30" style={{ backgroundImage: `url(${p.authorityImage ?? p.heroImage})` }} />
+                  <div className="absolute inset-0" style={{ backgroundColor: "rgba(15,15,15,0.8)" }} />
+                  <div className="relative flex flex-col items-center gap-3 text-center px-6">
+                    <PlayCircle size={54} className="text-gold transition-transform group-hover:scale-110" strokeWidth={1} />
+                    <span className="text-[10px] tracking-[0.3em] uppercase text-stone-300">Vídeo em breve</span>
+                    <span className="text-[11px] text-stone-400 leading-relaxed">Reels e Stories do escritório no Instagram</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <div>
+              <div className="grid grid-cols-3 gap-3 mb-8">
+                {[0, 1, 2, 3, 4, 5].map((i) => (
+                  <a
+                    key={i}
+                    href={INSTAGRAM_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => trackEvent("click_instagram", { local: "grade_instagram" })}
+                    className="group relative aspect-square overflow-hidden border border-gold/20"
+                    aria-label="Ver publicações no Instagram"
+                  >
+                    <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${i % 2 === 0 ? painsBg : finalBg})` }} />
+                    <div className="absolute inset-0 transition-colors group-hover:bg-black/60" style={{ backgroundColor: "rgba(15,15,15,0.8)" }} />
+                    <FaInstagram className="absolute inset-0 m-auto w-5 h-5 text-gold opacity-70 group-hover:opacity-100 transition-opacity" />
+                  </a>
+                ))}
+              </div>
+              <a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackEvent("click_instagram", { local: "cta_instagram" })}
+                className="cta-pulse-gold inline-flex w-full items-center justify-center gap-3 px-6 py-4 text-[11px] sm:text-xs tracking-[0.2em] uppercase font-semibold text-charcoal-deep text-center"
+                style={{ backgroundColor: "#bfa15f" }}
+              >
+                <FaInstagram className="w-5 h-5 shrink-0" />
+                Clique aqui e conheça nossa rotina e autoridade no Instagram
+              </a>
+              <p className="mt-4 text-center text-[11px] tracking-[0.25em] uppercase text-stone-400">@gilsoncarvalho.adv</p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* CTA FINAL — WHATSAPP DIRETO */}
       <section id="triagem" className="relative py-24 lg:py-28 overflow-hidden">
         <div className="absolute inset-0 bg-cover bg-center bg-fixed" style={{ backgroundImage: `url(${finalBg})` }} />
         <div className="absolute inset-0" style={{ backgroundColor: "rgba(15,15,15,0.8)" }} />
@@ -247,91 +325,42 @@ export default function LegalLanding(p: LandingProps) {
               Pronto para dar o <em className="text-gold-gradient not-italic">próximo passo seguro?</em>
             </h3>
             <p className="text-stone-300 leading-relaxed max-w-2xl mx-auto">
-              Agende uma consulta privada e receba orientação estratégica feita sob medida para o seu caso.
+              Fale diretamente com o Dr. Gilson pelo WhatsApp e receba orientação estratégica feita sob medida para o seu caso, com total sigilo.
             </p>
-            <p className="mt-6 text-[11px] tracking-[0.3em] uppercase text-gold">Escolha a opção desejada abaixo:</p>
           </div>
 
           <div className="grid lg:grid-cols-5 gap-8 items-start">
-            {/* Embedded form */}
-            <form onSubmit={handleSubmit} className="lg:col-span-3 p-8 md:p-10 border border-gold/20 space-y-5" style={{ backgroundColor: "rgba(20,20,20,0.85)" }}>
-              <h4 className="font-serif-luxe text-2xl text-stone-50 mb-2">Formulário de Triagem Privada</h4>
-              <p className="text-xs text-stone-400 mb-4">Preencha abaixo — entraremos em contato com a discrição que o seu caso merece.</p>
+            <div className="lg:col-span-3 p-8 md:p-10 border border-gold/20 flex flex-col items-center text-center gap-6" style={{ backgroundColor: "rgba(20,20,20,0.85)" }}>
+              <h4 className="font-serif-luxe text-2xl md:text-3xl text-stone-50">Atendimento privado e imediato</h4>
+              <p className="text-stone-300 text-sm leading-relaxed max-w-md">
+                Sem formulários e sem burocracia: sua conversa começa agora, direto com o escritório.
+              </p>
+              <a
+                href={waLink(p.whatsappMessage)}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackWhatsApp("cta_final")}
+                className="wa-pulse-cta inline-flex w-full items-center justify-center gap-3 px-6 py-5 text-xs tracking-[0.25em] uppercase font-semibold shadow-2xl shadow-green-900/30"
+                style={{ backgroundColor: "#25D366", color: "#0d2418" }}
+              >
+                <FaWhatsapp className="w-5 h-5" /> Falar com o Dr. Gilson no WhatsApp
+              </a>
+              <ul className="grid sm:grid-cols-3 gap-3 w-full pt-2">
+                {["Resposta rápida", "Sigilo profissional", "Atendimento em todo o Brasil"].map((it) => (
+                  <li key={it} className="flex items-center justify-center gap-2 text-[11px] tracking-[0.15em] uppercase text-stone-400">
+                    <Check size={13} className="text-gold shrink-0" /> {it}
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-              {sent ? (
-                <div className="flex flex-col items-center text-center py-10 gap-4">
-                  <CheckCircle2 size={56} className="text-gold" strokeWidth={1.2} />
-                  <p className="font-serif-luxe text-2xl text-stone-50">Triagem iniciada com sucesso!</p>
-                  <p className="text-stone-400 text-sm">Clique no botão verde abaixo para iniciar sua conversa privada no WhatsApp.</p>
-                  <a
-                    href={waFinalLink || waLink(p.whatsappMessage)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => trackWhatsApp("pos_triagem")}
-                    className="wa-pulse-cta mt-2 inline-flex items-center justify-center gap-3 px-6 py-4 text-xs tracking-[0.25em] uppercase font-semibold shadow-2xl shadow-green-900/30"
-                    style={{ backgroundColor: "#25D366", color: "#0d2418" }}
-                  >
-                    <FaWhatsapp className="w-5 h-5" /> Abrir conversa no WhatsApp
-                  </a>
-                </div>
-
-              ) : (
-                <>
-                  {[
-                    { id: "nome", label: "Nome Completo", type: "text", placeholder: "Seu nome completo" },
-                    { id: "telefone", label: "Telefone / WhatsApp", type: "tel", placeholder: "(63) 99999-9999" },
-                    { id: "email", label: "E-mail", type: "email", placeholder: "seu@email.com" },
-                  ].map((f) => (
-                    <div key={f.id}>
-                      <label htmlFor={`${f.id}-tri`} className="block text-[10px] tracking-[0.3em] uppercase text-gold mb-2">{f.label}</label>
-                      <input
-                        id={`${f.id}-tri`}
-                        type={f.type}
-                        required
-                        maxLength={f.id === "telefone" ? 15 : 150}
-                        placeholder={f.placeholder}
-                        inputMode={f.id === "telefone" ? "numeric" : undefined}
-                        value={form[f.id as keyof typeof form]}
-                        onChange={(e) => {
-                          const v = f.id === "telefone" ? maskPhone(e.target.value) : e.target.value;
-                          setForm({ ...form, [f.id]: v });
-                        }}
-                        className="w-full bg-transparent border-b border-white/20 focus:border-gold py-2.5 text-stone-100 placeholder:text-stone-600 outline-none transition-colors"
-                      />
-                    </div>
-                  ))}
-                  <div>
-                    <label htmlFor="mensagem-tri" className="block text-[10px] tracking-[0.3em] uppercase text-gold mb-2">Relate brevemente o seu caso</label>
-                    <textarea
-                      id="mensagem-tri"
-                      required
-                      rows={4}
-                      maxLength={1000}
-                      value={form.mensagem}
-                      onChange={(e) => setForm({ ...form, mensagem: e.target.value })}
-                      className="w-full bg-transparent border border-white/15 focus:border-gold p-3 text-stone-100 placeholder:text-stone-600 outline-none transition-colors resize-none"
-                      placeholder="Conte um pouco sobre a sua necessidade…"
-                    />
-                  </div>
-                  {error && <p className="text-[12px] text-red-300">{error}</p>}
-                  <button type="submit" disabled={sending} className="cta-pulse-gold w-full gold-gradient text-charcoal-deep font-medium py-3.5 text-sm tracking-[0.25em] uppercase hover:shadow-2xl hover:shadow-amber-900/40 transition-all disabled:opacity-60">
-                    {sending ? "Abrindo WhatsApp…" : "Enviar pelo WhatsApp"}
-                  </button>
-
-                  <p className="text-[11px] text-stone-400 text-center leading-relaxed pt-1">
-                    🔒 Dados protegidos sob sigilo profissional · LGPD
-                  </p>
-                </>
-              )}
-            </form>
-
-            {/* Direct channels */}
+            {/* Canais diretos */}
             <aside className="lg:col-span-2 space-y-5">
               <a
                 href={waLink(p.whatsappMessage)}
                 target="_blank"
                 rel="noopener noreferrer"
-            onClick={() => trackWhatsApp("cta")}
+                onClick={() => trackWhatsApp("cta")}
                 className="wa-pulse-cta relative flex items-center justify-center gap-3 text-charcoal-deep font-semibold px-6 py-4 text-xs tracking-[0.25em] uppercase shadow-2xl shadow-green-900/30"
                 style={{ backgroundColor: "#25D366", color: "#0d2418" }}
               >
@@ -363,8 +392,17 @@ export default function LegalLanding(p: LandingProps) {
                     <MapPin size={14} className="text-gold" />
                   </span>
                   <div>
-                    <div className="text-[10px] tracking-[0.3em] uppercase text-gold mb-0.5">Endereço</div>
+                    <div className="text-[10px] tracking-[0.3em] uppercase text-gold mb-0.5">Matriz · Gurupi/TO</div>
                     <div className="text-stone-100 text-sm">Av. Guanabara, 1669 — Centro · Gurupi/TO</div>
+                  </div>
+                </a>
+                <a href={MAPS_URL_RJ} target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 hover:opacity-80 transition-opacity">
+                  <span className="flex items-center justify-center w-9 h-9 border border-gold/40 shrink-0">
+                    <MapPin size={14} className="text-gold" />
+                  </span>
+                  <div>
+                    <div className="text-[10px] tracking-[0.3em] uppercase text-gold mb-0.5">Filial · Rio de Janeiro/RJ</div>
+                    <div className="text-stone-100 text-sm">Rio de Janeiro/RJ — atendimento com hora marcada</div>
                   </div>
                 </a>
                 <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-[11px] tracking-[0.25em] uppercase text-stone-300 hover:text-gold transition-colors pt-2">
@@ -390,9 +428,24 @@ export default function LegalLanding(p: LandingProps) {
               <span className="text-xs tracking-[0.3em] uppercase text-gold">Onde Estamos</span>
               <div className="w-12 h-px bg-gold" />
             </div>
-            <h3 className="font-serif-luxe text-3xl md:text-4xl text-stone-50">Escritório em Gurupi/TO</h3>
-            <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 mt-3 text-stone-300 hover:text-gold transition-colors text-sm">
-              <MapPin size={14} className="text-gold" /> Av. Guanabara, nº 1669, Centro — Gurupi/TO
+            <h3 className="font-serif-luxe text-3xl md:text-4xl text-stone-50">Atuação em Tocantins e Rio de Janeiro</h3>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6 mb-10">
+            <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="card-hover-gold block p-6 border border-gold/20" style={{ backgroundColor: "rgba(30,30,30,0.7)" }}>
+              <div className="text-[10px] tracking-[0.3em] uppercase text-gold mb-2">Matriz</div>
+              <div className="font-serif-luxe text-xl text-stone-50 mb-2">Gurupi — Tocantins</div>
+              <p className="text-stone-300 text-sm">Av. Guanabara, nº 1669, Centro — Gurupi/TO</p>
+              <span className="inline-flex items-center gap-2 mt-3 text-[11px] tracking-[0.2em] uppercase text-gold">
+                <MapPin size={13} /> Ver no mapa
+              </span>
+            </a>
+            <a href={MAPS_URL_RJ} target="_blank" rel="noopener noreferrer" className="card-hover-gold block p-6 border border-gold/20" style={{ backgroundColor: "rgba(30,30,30,0.7)" }}>
+              <div className="text-[10px] tracking-[0.3em] uppercase text-gold mb-2">Filial</div>
+              <div className="font-serif-luxe text-xl text-stone-50 mb-2">Rio de Janeiro — RJ</div>
+              <p className="text-stone-300 text-sm">Atendimento presencial mediante agendamento prévio.</p>
+              <span className="inline-flex items-center gap-2 mt-3 text-[11px] tracking-[0.2em] uppercase text-gold">
+                <MapPin size={13} /> Ver no mapa
+              </span>
             </a>
           </div>
           <div className="border border-gold/20 overflow-hidden shadow-2xl shadow-black/40">
@@ -418,10 +471,19 @@ export default function LegalLanding(p: LandingProps) {
               <p className="text-xs tracking-[0.25em] uppercase text-gold mb-1">OAB/TO 2.591 · OAB/RJ 256.131</p>
               <p className="text-stone-400 text-sm">Direito de Família e Sucessões · Atendimento sigiloso.</p>
             </div>
-            <div className="space-y-2 text-sm md:text-right">
-              <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="block text-stone-300 hover:text-gold transition-colors">
-                Av. Guanabara, nº 1669, Centro — Gurupi/TO
-              </a>
+            <div className="space-y-3 text-sm md:text-right">
+              <div>
+                <div className="text-[10px] tracking-[0.3em] uppercase text-gold mb-1">Matriz · Gurupi/TO</div>
+                <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="block text-stone-300 hover:text-gold transition-colors">
+                  Av. Guanabara, nº 1669, Centro — Gurupi/TO
+                </a>
+              </div>
+              <div>
+                <div className="text-[10px] tracking-[0.3em] uppercase text-gold mb-1">Filial · Rio de Janeiro/RJ</div>
+                <a href={MAPS_URL_RJ} target="_blank" rel="noopener noreferrer" className="block text-stone-300 hover:text-gold transition-colors">
+                  Rio de Janeiro/RJ — ver no mapa
+                </a>
+              </div>
               <a href={waLink(p.whatsappMessage)} target="_blank" rel="noopener noreferrer" onClick={() => trackWhatsApp("telefone")} className="block text-stone-300 hover:text-gold transition-colors">
                 +55 (63) 98447-4070
               </a>
@@ -436,6 +498,7 @@ export default function LegalLanding(p: LandingProps) {
           <p className="text-xs text-stone-500 text-center pt-6 border-t border-white/5">© 2026 Gilson Carvalho — Advocacia. Todos os direitos reservados.</p>
         </div>
       </footer>
+
 
       {/* WHATSAPP FLOAT */}
       <div className="fixed right-4 sm:right-6 bottom-24 sm:bottom-6 z-40 flex flex-col items-end gap-2">
